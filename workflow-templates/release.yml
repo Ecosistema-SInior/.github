@@ -1,0 +1,14 @@
+# Publica versiones con release-please (ver docs/VERSIONADO.md de la organización).
+name: Release
+
+on:
+  push:
+    branches: [$default-branch]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    uses: Ecosistema-SInior/.github/.github/workflows/release-please.yml@main

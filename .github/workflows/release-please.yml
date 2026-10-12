@@ -1,0 +1,30 @@
+# Workflow reutilizable de releases para todos los repositorios del ecosistema.
+# Cada repositorio lo llama desde .github/workflows/release.yml (ver
+# workflow-templates/release.yml) y declara ahí los permisos.
+#
+# Lee release-please-config.json y .release-please-manifest.json del
+# repositorio que llama. Ver docs/VERSIONADO.md.
+name: release-please
+
+on:
+  workflow_call:
+    outputs:
+      release_created:
+        description: "true si este push publicó un Release"
+        value: ${{ jobs.release-please.outputs.release_created }}
+      tag_name:
+        description: "El tag del Release publicado (vX.Y.Z)"
+        value: ${{ jobs.release-please.outputs.tag_name }}
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

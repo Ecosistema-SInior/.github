@@ -1,0 +1,6 @@
+{
+  "name": "Release (release-please)",
+  "description": "Versión, CHANGELOG y Release desde los commits convencionales. Estándar del Ecosistema SInior.",
+  "iconName": "octicon tag",
+  "categories": ["Automation"]
+}
